@@ -32,6 +32,9 @@ By default it should be like:
   cert: fs.readFileSync('/etc/letsencrypt/live/demochain.birdo.uk/fullchain.pem'),
   ```
 
+![image](https://github.com/user-attachments/assets/64992816-496c-40a4-9378-83796ba07d18)
+
+
 ## Overview
 This is a secure web-based dashboard for managing and monitoring a network of connected bots, providing real-time insights into bot infrastructure, launching network tests, and user management.
 
