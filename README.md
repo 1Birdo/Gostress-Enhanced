@@ -1,6 +1,6 @@
 # WebC2Go
 ## 🚧 Under construction and still thinking of Public Release 
-### You can watch the low-Quality Video Demo for an Idea as it was in development
+### You can watch the low-Quality Video Demo for an Idea as it IS CURRENTLY in development
 Yes the video is only 10MB
 
 
