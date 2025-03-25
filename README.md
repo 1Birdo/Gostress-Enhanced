@@ -82,7 +82,7 @@ go build -o WebC2dashboard
 
 ### 4. Run the Application
 ```bash
-./botnet-dashboard
+./WebC2dashboard
 ```
 
 ### Optional . Run without building 
