@@ -1,6 +1,6 @@
 # WebC2Go
 ## 🚧 Under construction and still thinking of Public Release 
-# You can watch the Demo for an Idea as it was in development
+### You can watch the Demo for an Idea as it was in development
 ## ⚠️ Ethical Warning
 **This project is for educational and research purposes only. Unauthorized use of botnets or network attacks is illegal and unethical. Always obtain proper consent before any network testing. Blah blah blah**
 
