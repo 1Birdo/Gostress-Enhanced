@@ -1,8 +1,13 @@
 # WebC2Go
 ## 🚧 Under construction and still thinking of Public Release 
-### You can watch the Demo for an Idea as it was in development
+### You can watch the low-Quality Video Demo for an Idea as it was in development
+Yes the video is only 10MB
+
+
 ## ⚠️ Ethical Warning
 **This project is for educational and research purposes only. Unauthorized use of botnets or network attacks is illegal and unethical. Always obtain proper consent before any network testing. Blah blah blah**
+
+https://github.com/user-attachments/assets/77f07155-ae5d-4873-97d5-da0ca745e643
 
 ```bash
 Yes, this IS / WILL be an Updated Version of the Preivous Repos I have Published
