@@ -2,7 +2,7 @@
 ## 🚧 Under construction and still thinking of Public Release 
 ### You can watch the low-Quality Video Demo for an Idea as it IS CURRENTLY in development
 Yes the video is only 10MB, I did also forget to send an Attack example to the bot to Show that it does retrive the command and sends based on the Attack command Correctly
-Along with the need of the Command !persist !lock !kill. This also does have a kill attack command to stop any on-going attack, this is based on the Bot / Devies Code if u tend to use a custom one. 
+Along with Commands like:  !persist !lock !kill. This also does have a kill attack command to stop any on-going attack, this is based on the Bot / Devies Code if u tend to use a custom one. 
 
 https://github.com/user-attachments/assets/a8fbaa40-6306-41d7-be45-84a3e2e72afc
 
