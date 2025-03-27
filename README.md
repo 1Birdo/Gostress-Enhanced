@@ -6,8 +6,9 @@ Along with Commands like:  !persist !lock !kill. This also does have a kill atta
 
 https://github.com/user-attachments/assets/a8fbaa40-6306-41d7-be45-84a3e2e72afc
 
-This is the current Proposed Proxy Layer Architecture
 
+This is the current Proposed Proxy Layer Architecture
+The video does NOT show this as this is past the video timestamp 
 
 [Bots] <-> [P2P Proxies] <-> [C2 Server]
 
