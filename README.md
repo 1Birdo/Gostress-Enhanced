@@ -6,6 +6,10 @@ Along with Commands like:  !persist !lock !kill. This also does have a kill atta
 
 https://github.com/user-attachments/assets/a8fbaa40-6306-41d7-be45-84a3e2e72afc
 
+This is the current Proposed Proxy Layer Architecture
+
+
+[Bots] <-> [P2P Proxies] <-> [C2 Server]
 
 ## ⚠️ Ethical Warning
 **This project is for educational and research purposes only. Unauthorized use of botnets or network attacks is illegal and unethical. Always obtain proper consent before any network testing. Blah blah blah**
