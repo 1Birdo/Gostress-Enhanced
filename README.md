@@ -1,142 +1,55 @@
-# WebC2Go
-## 🚧 Under construction and still thinking of Public Release 
+# WebC2Go - Modern Botnet C2 Framework
+
+![image](https://github.com/user-attachments/assets/19afdc80-fe05-4973-ba86-45b1083285ac)
 
 
-This is the current Proposed Proxy Layer Architecture
-The video does NOT show this as this is past the video timestamp 
+## ⚠️ Legal and Ethical Disclaimer
+**This project is for educational, research, and authorized penetration testing purposes only.**  
+Unauthorized use of this software for attacking targets without prior mutual consent is illegal.  
+Developers assume no liability and are not responsible for any misuse or damage caused by this software.
 
-[Bots] <-> [P2P Proxies] <-> [C2 Server]
+## 🌟 Features Overview
+### Core Infrastructure
+- **Multi-layer Architecture**: [Bots] ↔ [P2P Proxies] ↔ [C2 Server]
+- **TLS 1.3 Encryption**: All communications secured with modern cryptography
+- **FastFlux DNS**: Built-in DNS proxy layer for resilient infrastructure
+- **Self-Healing Network**: Automatic peer discovery and synchronization
 
-## ⚠️ Ethical Warning
-**This project is for educational and research purposes only. Unauthorized use of botnets or network attacks is illegal and unethical. Always obtain proper consent before any network testing. Blah blah blah**
+### Web Dashboard
+- **Real-time Monitoring**: Live bot metrics and attack statistics
+- **Geolocation Tracking**: Visualize bot distribution worldwide
+- **Role-Based Access**: Granular permission system (Owner/Admin/User)
+- **Session Management**: Secure authentication with timeout protection
 
+### Bot Capabilities
+- **Multiple Attack Vectors**: UDP/TCP/SYN/ACK/DNS/HTTP floods
+- **Persistence Mechanisms**: Systemd services, cron jobs, hidden directories
+- **Resource Reporting**: CPU, RAM, architecture details
+- **Auto-Update**: Secure update system with integrity checks
 
+## 🛠️ Technical Specifications
+| Component       | Technology Stack                          |
+|-----------------|-------------------------------------------|
+| Language        | Go (Golang)                               |
+| Web Framework   | Gorilla WebSocket + net/http              |
+| Encryption      | AES-256-GCM + HMAC-SHA256                 |
+| Network         | TLS 1.3, FastFlux DNS, P2P Proxy Network |
+| Data Storage    | JSON-based configuration                  |
+
+## 🚀 Getting Started
+### Prerequisites
+- Go 1.20+ (with module support)
+- OpenSSL (for certificate generation)
+- Linux/Unix environment (for full feature support)
+
+### Installation
 ```bash
-Yes, this IS / WILL be an Updated Version of the Preivous Repos I have Published
-The Bot Connection Protocol is the same but yet to be changed for the release.
-```
-[BotnetGO](https://github.com/Birdo1221/Better-Go-Cnc/)
-
-[Golang-Net](https://github.com/Birdo1221/Better-Go-Cnc/)
-
-
-
-```bash
-The Main Different is converting it to a web interface with a better Codebase in-General
-I WILL be Implementing CERTBOT to this as well for better self-siging certs and will stick to TLS 1.3
-
-You can do this yourself by changing the Hard-Coded Certificates location with the ones you have Generated with CERTBOT
-By default it should be like:
-  Only Examples: 
-  key: fs.readFileSync('/etc/letsencrypt/live/demokey.birdo.uk/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/demochain.birdo.uk/fullchain.pem'),
-  ```
-
-![image](https://github.com/user-attachments/assets/64992816-496c-40a4-9378-83796ba07d18)
-
-
-## Overview
-This is a secure web-based dashboard for managing and monitoring a network of connected bots, providing real-time insights into bot infrastructure, launching network tests, and user management.
-
-### Key Features
-
-- 🔒 Secure HTTPS web interface with TLS 1.3
-- 👥 Multi-user authentication system
-- 🌍 Geolocation tracking for connected bots
-- 📊 Real-time bot and attack monitoring
-- 🚀 Network testing capabilities
-- 🔐 Role-based access control
-
-## Architecture
-
-The application consists of two main servers:
-1. **Bot Server**: Manages incoming bot connections (TCP)
-2. **Web Server**: Provides management interface (HTTPS)
-
-### Technologies
-- Language: Go (Golang)
-- Web Server: Standard `net/http`
-- Authentication: Session-based
-- Security: TLS 1.3, secure cookie management
-- Geolocation: External API integration
-
-## Prerequisites
-
-- Go 1.20+
-- OpenSSL (for certificate generation) | To-do = implement CERTBOT for better self-signing 
-- Internet connection for geolocation services
-
-## Installation
-
-### 1. Clone the Repository
-```bash
+# Clone repository
 git clone https://github.com/Birdo1221/WebC2Go.git
 cd WebC2Go
-```
-
-### 2. Generate SSL Certificates
-The application will guide you to generate self-signed certificates using OpenSSL during first run.
-
-### 3. Build the Application
-```bash
+# Install dependencies
 go mod tidy
-go build -o WebC2dashboard
-```
-
-### 4. Run the Application
-```bash
-./WebC2dashboard
-```
-
-### Optional . Run without building 
-```bash
+# Build (production)
+go build -ldflags="-s -w" -o WebC2
+# Or run directly (development)
 go run main.go
-```
-
-## Setup
-
-On first run, the application will:
-- Generate self-signed SSL certificates
-- Create a `users.json` file
-- Generate a root user with random credentials
-
-🔑 **Note**: The root user credentials will be printed in the console log. Save them securely.
-
-## User Management
-
-- **Root User**: Full system access
-- **Admin Users**: Partial management rights
-- **Standard Users**: Limited access
-
-### Adding Users
-Only root users can add new users through the web interface.
-
-## Security Considerations
-
-- Uses TLS 1.3 with secure cipher suites
-- Session timeout mechanism
-- Strict access controls
-- Geolocation data sanitization
-- CSRF protection
-- Secure cookie management
-
-## Bot Connection Protocol
-   WILL CHANGE 🚧 Under construction 
-Bots communicate via a simple text-based protocol:
-- Handshake with system information
-- Periodic ping to maintain connection
-- Command execution for network testing
-
-## Logging
-
-Comprehensive logging for:
-- Bot connections
-- User actions
-- System events
-- Attack launch/stop operations
-
-## Development
-Warning This is in Development so no code has been published as of yet 
-
-## Contact
-For questions or concerns, please open an issue on the GitHub repository or visit my site to contact me.
