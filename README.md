@@ -12,7 +12,7 @@ Developers assume no liability and are not responsible for any misuse or damage 
 ### Core Infrastructure
 - **Multi-layer Architecture**: [Bots] ↔ [P2P Proxies] ↔ [C2 Server]
 - **TLS 1.3 Encryption**: All communications secured with modern cryptography
-- **FastFlux DNS**: Built-in DNS proxy layer for resilient infrastructure
+- **Custom DNS Servers**: Built-in DNS proxy layer for resilient infrastructure
 - **Self-Healing Network**: Automatic peer discovery and synchronization
 
 ### Web Dashboard
