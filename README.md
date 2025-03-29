@@ -1,6 +1,6 @@
 # WebC2Go - Modern Botnet C2 Framework
 
-![image](https://github.com/user-attachments/assets/142d52a7-22c9-4ff3-a6fd-7e291c0a71f5)
+![image](https://github.com/user-attachments/assets/ca2355e7-3d10-4e97-9061-880657b931e9)
 
 
 ## ⚠️ Legal and Ethical Disclaimer
