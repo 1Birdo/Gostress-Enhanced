@@ -34,7 +34,7 @@ Developers assume no liability and are not responsible for any misuse or damage 
 | Language        | Go (Golang)                               |
 | Web Framework   | Gorilla WebSocket + net/http              |
 | Encryption      | AES-256-GCM + HMAC-SHA256                 |
-| Network         | TLS 1.3, Custom Flux DNS, P2P Proxy Network |
+| Network         | TLS 1.3, P2P Proxy Network                |
 | Data Storage    | JSON-based configuration                  |
 
 ## 🚀 Getting Started
