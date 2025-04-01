@@ -1,4 +1,3 @@
-# WebC2Go - Modern Botnet C2 Framework
 
 No File! | Still developing, just wait IG, idk what to tell ya
 
