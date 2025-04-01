@@ -17,7 +17,7 @@ No File! | Still developing, just wait IG, idk what to tell ya
 - **Session Management**: Secure authentication with timeout protection
 
 ### Bot Capabilities
-- **Multiple Attack Vectors**: UDP/TCP/SYN/ACK/DNS/HTTP floods
+- **Multiple Attack Vectors**: UDP/TCP/SYN/ACK/DNS/HTTP/TLS floods
 - **Persistence Mechanisms**: Systemd services, cron jobs, hidden directories
 - **Resource Reporting**: CPU, RAM, architecture details
 - **Auto-Update**: Secure update system with integrity checks
