@@ -16,9 +16,8 @@
 
 | Login | Dashboard |
 |-------|----------|
-| ![Login](https://github.com/user-attachments/assets/311702c6-2534-4acb-b09a-abf52d619c99) | ![Dashboard](https://github.com/user-attachments/assets/ca2355e7-3d10-4e97-9061-880657b931e9) |
+| ![Login](https://github.com/user-attachments/assets/ba0135b7-b7fa-4e12-8b30-562765bab8d5) | ![Dashboard](https://github.com/user-attachments/assets/ca2355e7-3d10-4e97-9061-880657b931e9) |
 
-  
 ### Web Dashboard
 - **Real-time Monitoring**: Live bot metrics and attack statistics
 - **Geolocation Tracking**: Visualize bot distribution worldwide
