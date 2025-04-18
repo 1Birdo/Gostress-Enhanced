@@ -8,7 +8,7 @@ No File! | Still developing, just wait IG, idk what to tell ya
 ### Core Infrastructure
 - **Multi-layer Architecture**: [Bots] ↔ [P2P Proxies] ↔ [C2 Server]
 - **TLS 1.3 Encryption**: All communications secured with modern cryptography
-- **Command Encrpption**: Thoughout transit the every command is encrypted
+- **Command Encrpption**: Thoughout transit every command is encrypted
   
 ### Web Dashboard
 - **Real-time Monitoring**: Live bot metrics and attack statistics
