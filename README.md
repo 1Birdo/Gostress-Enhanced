@@ -42,7 +42,7 @@
 ## 🚀 Getting Started
 ### Prerequisites
 - Go 1.20+ (with module support)
-- OpenSSL (for certificate generation) , Must Change to using Certbot for domain
+- OpenSSL (for certificate generation) , Must Change to using Certbot for verified trusted Certs
 - Linux/Unix environment (for full feature support)
 
 ### Installation
