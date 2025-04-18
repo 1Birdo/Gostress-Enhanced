@@ -14,10 +14,6 @@
 - **TLS 1.3 Encryption**: All communications secured with modern cryptography
 - **Command Encrpption**: Thoughout transit every command is encrypted
 
-| Startup  |
-|---------|
-| ![Startup](https://github.com/user-attachments/assets/9ff3101e-cea6-4a7c-8d13-af54f8c891cc) | 
-
 | Login | Dashboard |
 |-------|----------|
 | ![Login](https://github.com/user-attachments/assets/ba0135b7-b7fa-4e12-8b30-562765bab8d5) | ![Dashboard](https://github.com/user-attachments/assets/ca2355e7-3d10-4e97-9061-880657b931e9) |
