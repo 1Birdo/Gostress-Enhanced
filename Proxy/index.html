@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudSync Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .galaxy-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(ellipse at bottom, #0f172a 0%, #090a0f 100%);
+            overflow: hidden;
+            will-change: transform;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="0.5" fill="white" opacity="0.8"/></svg>') repeat;
+            animation: twinkle 200s linear infinite;
+            will-change: transform;
+        }
+
+        .stars:nth-child(2) {
+            transform: scale(1.5);
+            animation: twinkle 150s linear infinite;
+            opacity: 0.6;
+        }
+
+        .stars:nth-child(3) {
+            transform: scale(2);
+            animation: twinkle 100s linear infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes twinkle {
+            0% { transform: rotate(0deg) translateZ(0); }
+            100% { transform: rotate(360deg) translateZ(0); }
+        }
+
+        .cyber-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.5;
+            will-change: opacity;
+        }
+
+        .cyber-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+            animation: pulse 15s ease infinite alternate;
+            will-change: opacity;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .circuit-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            will-change: transform;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            will-change: transform;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(99, 102, 241, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            filter: blur(1px);
+            will-change: transform, opacity;
+            transform: translateZ(0);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0) translateZ(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px) translateZ(0); opacity: 0; }
+        }
+
+        .optimized-blur {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .status-bar {
+            height: 6px;
+            background: linear-gradient(90deg, #4f46e5 0%, #10b981 65%, #f59e0b 100%);
+            animation: progress 2s ease-in-out infinite;
+            background-size: 200% 100%;
+        }
+
+        @keyframes progress {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glow-text {
+            text-shadow: 0 0 8px rgba(79, 70, 229, 0.6);
+        }
+
+        .animate-delay-100 {
+            animation-delay: 100ms;
+        }
+        .animate-delay-200 {
+            animation-delay: 200ms;
+        }
+        .animate-delay-300 {
+            animation-delay: 300ms;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 text-gray-100 overflow-hidden">
+    <div class="galaxy-bg"></div>
+    <div class="stars"></div>
+    <div class="stars"></div>
+    <div class="stars"></div>
+    <div class="cyber-grid"></div>
+    <div class="cyber-glow"></div>
+    <div class="circuit-lines"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="max-w-4xl w-full mx-auto px-4 py-8">
+        <div class="bg-gray-800/90 optimized-blur rounded-xl shadow-2xl overflow-hidden border border-gray-700/50 animate__animated animate__fadeIn">
+            <div class="bg-gradient-to-r from-indigo-900 to-indigo-800 p-8 text-center relative overflow-hidden">
+                <div class="absolute inset-0 overflow-hidden">
+                    <div class="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-indigo-500/10 filter blur-3xl transform translateZ(0)"></div>
+                    <div class="absolute -bottom-20 -right-20 w-40 h-40 rounded-full bg-purple-500/10 filter blur-3xl transform translateZ(0)"></div>
+                    <div class="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-blue-500/5 filter blur-3xl transform -translate-x-1/2 -translate-y-1/2 translateZ(0)"></div>
+                </div>
+                
+                <div class="relative z-10">
+                    <div class="inline-block bg-indigo-700/30 p-4 rounded-full mb-6 optimized-blur border border-indigo-500/30 transform translateZ(0) animate__animated animate__pulse animate__infinite">
+                        <i class="fas fa-cloud text-indigo-300 text-4xl"></i>
+                    </div>
+                    <h1 class="text-4xl font-bold text-white mb-2 glow-text animate__animated animate__fadeIn">CloudSync Services</h1>
+                    <p class="text-xl text-indigo-200 animate__animated animate__fadeIn animate-delay-100">Secure cloud solutions for modern businesses</p>
+                </div>
+            </div>
+
+            <div class="p-8">
+                <div class="flex items-center mb-8 animate__animated animate__fadeIn animate-delay-200">
+                    <div class="bg-yellow-500/10 p-3 rounded-full mr-4 border border-yellow-500/30">
+                        <i class="fas fa-tools text-yellow-400"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-semibold text-white">Scheduled Maintenance</h2>
+                        <p class="text-gray-400">We're improving our services for you</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6 mb-8">
+                    <div class="flex items-start animate__animated animate__fadeIn animate-delay-300">
+                        <div class="bg-green-500/10 p-2 rounded-full mr-4 border border-green-500/20 mt-1">
+                            <i class="fas fa-check-circle text-green-400 text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-white">What's happening?</h3>
+                            <p class="text-gray-400">We're performing scheduled maintenance to upgrade our infrastructure and enhance performance.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start animate__animated animate__fadeIn animate-delay-400">
+                        <div class="bg-blue-500/10 p-2 rounded-full mr-4 border border-blue-500/20 mt-1">
+                            <i class="fas fa-clock text-blue-400 text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-white">Estimated downtime</h3>
+                            <p class="text-gray-400">Services will be fully restored by <span class="font-medium text-blue-400">23:00 UTC</span>.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start animate__animated animate__fadeIn animate-delay-500">
+                        <div class="bg-purple-500/10 p-2 rounded-full mr-4 border border-purple-500/20 mt-1">
+                            <i class="fas fa-envelope text-purple-400 text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-white">Need help?</h3>
+                            <p class="text-gray-400">Contact our support team at <a href="mailto:support@cloudsync.example" class="text-indigo-400 hover:underline">support@cloudsync.example</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-indigo-900/20 rounded-lg p-6 border border-indigo-800/50 animate__animated animate__fadeIn animate-delay-600">
+                    <div class="flex">
+                        <div class="bg-indigo-500/10 p-2 rounded-full mr-4 border border-indigo-500/20">
+                            <i class="fas fa-info-circle text-indigo-400 text-lg"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-medium text-white mb-2">Status Update</h3>
+                            <p class="text-indigo-200 mb-4">All systems are stable. We're currently at phase 2 of 3 in our maintenance process.</p>
+                            <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                <div class="status-bar h-2.5 rounded-full" style="width: 65%"></div>
+                            </div>
+                            <p class="text-xs text-indigo-300 mt-2">65% complete</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-12 text-center text-gray-400 text-sm animate__animated animate__fadeIn animate-delay-700">
+            <p>© 2023 CloudSync Services. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors"><i class="fab fa-github"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create particles
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 15;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particle.style.opacity = Math.random() * 0.7 + 0.3;
+                
+                particlesContainer.appendChild(particle);
+            }
+
+            // Animate elements sequentially
+            const animatedElements = document.querySelectorAll('.animate__animated');
+            animatedElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = 1;
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
