@@ -14,7 +14,10 @@
 - **TLS 1.3 Encryption**: All communications secured with modern cryptography
 - **Command Encrpption**: Thoughout transit every command is encrypted
 
-![image](https://github.com/user-attachments/assets/ca2355e7-3d10-4e97-9061-880657b931e9)
+| Login | Dashboard |
+|-------|----------|
+| ![Login](https://github.com/user-attachments/assets/311702c6-2534-4acb-b09a-abf52d619c99) | ![Dashboard](https://github.com/user-attachments/assets/ca2355e7-3d10-4e97-9061-880657b931e9) |
+
   
 ### Web Dashboard
 - **Real-time Monitoring**: Live bot metrics and attack statistics
