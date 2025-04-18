@@ -1,6 +1,6 @@
 
 No File! | Still developing, just wait IG, idk what to tell ya
-
+BTW the Proxy is optional 
 ![image](https://github.com/user-attachments/assets/ca2355e7-3d10-4e97-9061-880657b931e9)
 
 
