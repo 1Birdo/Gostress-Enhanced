@@ -1,0 +1,20 @@
+[
+  {
+    "Username": "root",
+    "Password": "IqO20gQi2iYU",
+    "Expire": "2026-03-24T11:53:00.0892774Z",
+    "Level": "Owner"
+  },
+  {
+    "Username": "ballss",
+    "Password": "ballss",
+    "Expire": "2026-03-24T11:53:00.0892774Z",
+    "Level": "Admin"
+  },
+  {
+    "Username": "Birdo",
+    "Password": "Birdo",
+    "Expire": "2026-03-26T23:49:17.598506Z",
+    "Level": "User"
+  }
+]
