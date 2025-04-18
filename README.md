@@ -1,9 +1,10 @@
 
 
-> No File! | Still developing, just wait IG, idk what to tell ya
-
+> No Files! | Still developing, just wait IG, idk what to tell ya
 
 > the Proxy is optional
+
+> I've provided a certificate and private key for convenience. However, I highly recommend generating your own — for best practices. You can easily do this using tools like Let's Encrypt, Certbot, or OpenSSL. Many hosting or DNS providers also offer their own certificate solutions as an alternative.
 
 ![image](https://github.com/user-attachments/assets/ca2355e7-3d10-4e97-9061-880657b931e9)
 
