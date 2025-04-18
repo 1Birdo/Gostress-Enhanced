@@ -44,7 +44,7 @@
 ### Installation
   ```bash
   # Clone repository
-  git clone https://github.com/Birdo1221/WebC2Go.git
+  git clone https://github.com/Birdo1221/Gostress-Enhanced.git
   cd WebC2Go
   # Install dependencies
   go mod tidy
