@@ -34,13 +34,13 @@ Please make sure that both the Proxy server and the C2 Server are using both `cr
 - **Auto-Update**: Secure update system with integrity checks
 
 ## 🛠️ Technical Specifications
-| Component       | Technology Stack                          |
-|-----------------|-------------------------------------------|
-| Language        | Go (Golang)                               |
-| Web Framework   | Gorilla WebSocket + net/http              |
-| Encryption      | AES-256-GCM + HMAC-SHA256                 |
-| Network         | TLS 1.3, P2P Proxy Network                |
-| Data Storage    | JSON-based configuration                  |
+| Component       | Technology Stack                                          |
+|-----------------|-----------------------------------------------------------|
+| Language        | Go (Golang)                                               |
+| Web Framework   | Gorilla WebSocket + net/http                              |
+| Encryption      | AES-GCM and ChaCha20-Poly1305 cipher suites               |
+| Network         | TLS 1.3, P2P Proxy Network                                |
+| Data Storage    | JSON-based configuration                                  |
 
 ## 🚀 Getting Started
 ### Prerequisites
