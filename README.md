@@ -8,6 +8,8 @@
 >The proxy acts as a middleman, forwarding encrypted traffic between the bots
 >and the C2 server without decrypting it (simple io.Copy in both directions).
 
+Please make sure that both the Proxy server and the C2 Server are using both `crt` and `key` file 
+
 
 ## 🌟 Features Overview
 ### Core Infrastructure
