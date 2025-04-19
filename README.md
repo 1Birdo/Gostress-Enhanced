@@ -5,7 +5,8 @@
 >That said, I highly recommend generating your own for proper security. You can easily create one using tools like Let's Encrypt, Certbot, or OpenSSL.
 >Some hosting or DNS providers also offer their own certificate solutions if you prefer that route.
 
-
+>The proxy acts as a middleman, forwarding encrypted traffic between the bots
+>and the C2 server without decrypting it (simple io.Copy in both directions).
 
 
 ## 🌟 Features Overview
