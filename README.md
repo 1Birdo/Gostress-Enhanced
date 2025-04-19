@@ -1,5 +1,5 @@
 
->No files yet — still in development, so just hang tight for now.
+
 >
 >The proxy setup is optional, and I've included a certificate and private key for convenience.
 >That said, I highly recommend generating your own for proper security. You can easily create one using tools like Let's Encrypt, Certbot, or OpenSSL.
