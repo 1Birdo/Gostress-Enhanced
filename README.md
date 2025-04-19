@@ -10,7 +10,7 @@
 
 Please make sure that both the Proxy server and the C2 Server are using both `crt` and `key` file 
 
-> The ` **Geolocation Tracking**: Visualize bot distribution worldwide` is still in development 
+> The ` **Geolocation Tracking**: Visualize bot distribution worldwide` is still in development.
 
 ## 🌟 Features Overview
 ### Core Infrastructure
