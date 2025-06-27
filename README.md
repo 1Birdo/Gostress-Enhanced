@@ -1,13 +1,4 @@
 
-
->
->The proxy setup is optional, and I've included a certificate and private key for convenience.
->That said, I highly recommend generating your own for proper security. You can easily create one using tools like Let's Encrypt, Certbot, or OpenSSL.
->Some hosting or DNS providers also offer their own certificate solutions if you prefer that route.
-
->The proxy acts as a middleman, forwarding encrypted traffic between the bots
->and the C2 server without decrypting it (simple io.Copy in both directions).
-
 Please make sure that both the Proxy server and the C2 Server are using both `crt` and `key` file 
 
 > The ` **Geolocation Tracking**: Visualize bot distribution worldwide` is still in development.
@@ -47,6 +38,16 @@ Please make sure that both the Proxy server and the C2 Server are using both `cr
 - Go 1.20+ (with module support)
 - OpenSSL (for certificate generation) , Must Change to using Certbot for verified trusted Certs
 - Linux/Unix environment (for full feature support)
+
+
+>
+>The proxy setup is optional, and I've included a certificate and private key for convenience.
+>That said, I highly recommend generating your own for proper security. You can easily create one using tools like Let's Encrypt, Certbot, or OpenSSL.
+>Some hosting or DNS providers also offer their own certificate solutions if you prefer that route.
+
+>The proxy acts as a middleman, forwarding encrypted traffic between the bots
+>and the C2 server without decrypting it (simple io.Copy in both directions).
+
 
 ### Installation
   ```bash
