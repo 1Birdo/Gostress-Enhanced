@@ -7,7 +7,7 @@ Please make sure that both the Proxy server and the C2 Server are using both `cr
 ### Core Infrastructure
 - **Multi-layer Architecture**: [Bots] ↔ [P2P Proxies] ↔ [C2 Server]
 - **TLS 1.3 Encryption**: All communications secured with modern cryptography
-- **Command Encrpption**: Thoughout transit every command is encrypted
+- **Command Encrption**: Thoughout transit every command is encrypted
 
 | Login | Dashboard |
 |-------|----------|
