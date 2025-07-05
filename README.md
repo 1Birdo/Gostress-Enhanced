@@ -13,7 +13,7 @@ New Varient Out AT >https://github.com/1Birdo/Gostress-Optimized
 
 | Login | Dashboard |
 |-------|----------|
-| ![Login](https://github.com/user-attachments/assets/ba0135b7-b7fa-4e12-8b30-562765bab8d5) | ![Dashboard](https://github.com/user-attachments/assets/ca2355e7-3d10-4e97-9061-880657b931e9) |
+| ![Login](https://github.com/user-attachments/assets/7b8e0653-1178-4499-bea2-b1340260ada6) | ![Dashboard](https://github.com/user-attachments/assets/ca2355e7-3d10-4e97-9061-880657b931e9) |
 
 ### Web Dashboard
 - **Real-time Monitoring**: Live bot metrics and attack statistics
