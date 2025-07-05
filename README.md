@@ -3,7 +3,7 @@ Please make sure that both the Proxy server and the C2 Server are using both `cr
 
 > The ` **Geolocation Tracking**: Visualize bot distribution worldwide` is still in development.
 
-New Varient Out AT ` [[https://github.com/1Birdo/Gostress-Optimized]]`
+New Varient Out AT >https://github.com/1Birdo/Gostress-Optimized
 
 ## 🌟 Features Overview
 ### Core Infrastructure
