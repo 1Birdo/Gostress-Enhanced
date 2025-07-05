@@ -192,6 +192,85 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
+
+        /* New enhancements */
+        .cyber-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            animation: cyberPulse 8s infinite alternate;
+        }
+
+        @keyframes cyberPulse {
+            0% { transform: scale(1); opacity: 0.2; }
+            100% { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        .input-highlight {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1, #a855f7);
+            transition: width 0.3s ease;
+        }
+
+        .input-focus-effect:focus-within .input-highlight {
+            width: 100%;
+        }
+
+        .btn-cyber {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-cyber::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 35%, rgba(99, 102, 241, 0.3) 50%, transparent 65%);
+            transform: translateX(-100%) rotate(45deg);
+            transition: transform 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn-cyber:hover::before {
+            transform: translateX(100%) rotate(45deg);
+        }
+
+        .security-badge {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(145deg, rgba(99, 102, 241, 0.2), rgba(79, 70, 229, 0.1));
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .security-badge::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px dashed rgba(99, 102, 241, 0.4);
+            animation: rotateBadge 20s linear infinite;
+        }
+
+        @keyframes rotateBadge {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4 text-gray-100 overflow-hidden">
@@ -201,41 +280,44 @@
     <div class="stars"></div>
     <div class="cyber-grid"></div>
     <div class="cyber-glow"></div>
+    <div class="cyber-pulse"></div>
     <div class="circuit-lines"></div>
     <div class="particles" id="particles"></div>
     
     <div class="w-full max-w-md bg-gray-800/90 optimized-blur rounded-xl shadow-2xl overflow-hidden border border-gray-700/50 animate-fade-in login-card">
-        <div class="bg-gradient-to-r from-indigo-900 to-indigo-800 p-6 text-center relative overflow-hidden">
+        <div class="bg-gradient-to-r from-indigo-900/80 to-indigo-800/80 p-8 text-center relative overflow-hidden">
             <div class="absolute inset-0 overflow-hidden">
                 <div class="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-indigo-500/10 filter blur-3xl transform translateZ(0)"></div>
                 <div class="absolute -bottom-20 -right-20 w-40 h-40 rounded-full bg-purple-500/10 filter blur-3xl transform translateZ(0)"></div>
                 <div class="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-blue-500/5 filter blur-3xl transform -translate-x-1/2 -translate-y-1/2 translateZ(0)"></div>
             </div>
             
-            <div class="relative z-10 flex flex-col items-center justify-center gap-2">
-                <div class="w-16 h-16 rounded-full bg-indigo-700/30 flex items-center justify-center mb-4 optimized-blur border border-indigo-500/30 transform translateZ(0)">
-                    <i class="fas fa-shield-alt text-2xl text-indigo-300 animate-pulse"></i>
+            <div class="relative z-10 flex flex-col items-center justify-center gap-3">
+                <div class="security-badge mb-6">
+                    <i class="fas fa-shield-alt text-3xl text-indigo-300 animate-pulse"></i>
                 </div>
-                <h1 class="text-2xl font-bold text-white transform translateZ(0)">Security Dashboard</h1>
-                <p class="text-sm text-indigo-200 mt-1 transform translateZ(0)">Secure Access Portal</p>
+                <h1 class="text-3xl font-bold text-white transform translateZ(0) tracking-tight">SECURE PORTAL</h1>
+                <p class="text-sm text-indigo-200 mt-1 transform translateZ(0) font-mono tracking-wider">AUTHENTICATION REQUIRED</p>
+                
+                <div class="w-full max-w-xs h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent my-4"></div>
             </div>
         </div>
         
-        <div class="p-8">
+        <div class="p-8 pt-6">
             <form action="/login" method="POST" autocomplete="off" class="space-y-6">
                 {{if .Error}}
-                <div class="bg-red-900/30 border border-red-800/50 px-4 py-3 rounded-lg flex items-start optimized-blur transform translateZ(0)">
+                <div class="bg-red-900/30 border border-red-800/50 px-4 py-3 rounded-lg flex items-start optimized-blur transform translateZ(0) animate-shake">
                     <svg class="h-5 w-5 text-red-300 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
                     </svg>
                     <div>
                         <span class="text-sm font-medium text-red-200">{{.Error}}</span>
-                        <p class="text-xs text-red-300/80 mt-1">Please check your credentials and try again</p>
+                        <p class="text-xs text-red-300/80 mt-1">Authentication failed. Verify credentials and try again.</p>
                     </div>
                 </div>
                 {{end}}
                 
-                <div class="space-y-4">
+                <div class="space-y-5">
                     <div class="input-focus-effect bg-gray-700/50 border border-gray-600/50 rounded-lg transition-all duration-200 hover:border-gray-500 optimized-blur transform translateZ(0)">
                         <label for="username" class="sr-only">Username</label>
                         <div class="relative">
@@ -252,6 +334,7 @@
                                 autocorrect="off"
                                 class="block w-full pl-10 pr-3 py-3 bg-transparent border-none text-white placeholder-gray-400 focus:outline-none focus:ring-0 transform translateZ(0)"
                             >
+                            <div class="input-highlight"></div>
                         </div>
                     </div>
                     
@@ -273,6 +356,7 @@
                             <div class="password-toggle absolute" onclick="togglePasswordVisibility()">
                                 <i class="far fa-eye" id="toggleIcon"></i>
                             </div>
+                            <div class="input-highlight"></div>
                         </div>
                     </div>
                 </div>
@@ -280,31 +364,43 @@
                 <div class="pt-2">
                     <button 
                         type="submit" 
-                        class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 group relative overflow-hidden btn-effect"
+                        class="w-full flex justify-center items-center py-3 px-4 rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 focus:outline-none transition-all duration-200 group relative overflow-hidden btn-effect btn-cyber"
                     >
                         <span class="absolute inset-0 bg-gradient-to-r from-indigo-500/30 to-indigo-600/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translateZ(0)"></span>
-                        <span class="relative flex items-center transform translateZ(0)">
-                            <i class="fas fa-sign-in-alt mr-2"></i>
-                            Sign In
+                        <span class="relative flex items-center transform translateZ(0) tracking-wider">
+                            <i class="fas fa-fingerprint mr-2 animate-pulse"></i>
+                            VERIFY IDENTITY
                         </span>
                     </button>
                 </div>
 
-                <div class="flex justify-end pt-2">
+                <div class="flex justify-between items-center pt-2">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember" name="remember" class="h-4 w-4 rounded bg-gray-700 border-gray-600 text-indigo-600 focus:ring-indigo-500">
+                        <label for="remember" class="ml-2 text-xs text-gray-400 hover:text-gray-300 cursor-pointer">Remember this device</label>
+                    </div>
                     <button type="button" onclick="showForgotPassword()" class="text-xs font-medium text-indigo-400 hover:text-indigo-300 transition-colors duration-150 transform translateZ(0)">
-                        Forgot password?
+                        Forgot credentials?
                     </button>
                 </div>
             </form>
             
             <div class="mt-8 pt-6 border-t border-gray-700/50">
                 <div class="flex items-start">
-                    <i class="fas fa-shield-alt text-indigo-500 mr-2 mt-0.5 flex-shrink-0 transform translateZ(0)"></i>
+                    <div class="bg-indigo-900/20 p-2 rounded-lg mr-3">
+                        <i class="fas fa-shield-alt text-indigo-500 transform translateZ(0)"></i>
+                    </div>
                     <div>
-                        <p class="text-xs font-medium text-gray-300 transform translateZ(0)">Security Tip</p>
+                        <p class="text-xs font-medium text-gray-300 transform translateZ(0) uppercase tracking-wider">Security Notice</p>
                         <p class="text-xs text-gray-400 mt-1 transform translateZ(0)">
-                            Ensure you're on a trusted network before logging in. Verify the URL matches <span class="font-mono text-indigo-400">https://dashboard.example.com</span>
+                            Always verify the URL matches <span class="font-mono text-indigo-400">https://security.yourdomain.com</span> before entering credentials.
                         </p>
+                        <div class="flex items-center mt-2">
+                            <span class="text-xs text-green-400 flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-green-500 mr-1.5 animate-pulse"></span>
+                                Connection Secured
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -313,11 +409,11 @@
 
     <div id="forgotPasswordModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-70 opacity-0 pointer-events-none transition-opacity duration-300 optimized-blur">
         <div class="bg-gray-800 rounded-xl shadow-2xl max-w-md w-full border border-gray-700/50 transform translate-y-4 transition-transform duration-300 translateZ(0)">
-            <div class="p-6 border-b border-gray-700/50">
+            <div class="p-6 border-b border-gray-700/50 bg-gradient-to-r from-indigo-900/30 to-indigo-800/30">
                 <div class="flex items-center justify-between">
                     <h3 class="text-lg font-bold text-white flex items-center gap-2 transform translateZ(0)">
                         <i class="fas fa-key text-indigo-500"></i>
-                        Password Assistance
+                        CREDENTIAL RECOVERY
                     </h3>
                     <button onclick="closeModal()" class="text-gray-400 hover:text-white transition-colors transform translateZ(0)">
                         <i class="fas fa-times"></i>
@@ -326,21 +422,32 @@
             </div>
             <div class="p-6">
                 <div class="flex items-start mb-4">
-                    <i class="fas fa-info-circle text-indigo-500 text-xl mr-3 mt-0.5 flex-shrink-0 transform translateZ(0)"></i>
+                    <div class="bg-indigo-900/20 p-2 rounded-lg mr-3">
+                        <i class="fas fa-info-circle text-indigo-500 transform translateZ(0)"></i>
+                    </div>
                     <div>
                         <p class="text-sm text-gray-300 transform translateZ(0)">
-                            For security reasons, password recovery must be handled manually. Please contact the system administrator directly for assistance.
+                            For enhanced security, password recovery requires direct administrator verification.
                         </p>
-                        <div class="mt-4 bg-gray-700/50 p-3 rounded-lg optimized-blur transform translateZ(0)">
-                            <p class="text-xs text-gray-400 mb-1">Contact the Admin/Owner:</p>
-                            <p class="text-sm font-mono text-indigo-400">admin@yourdomain.com</p>
+                        <div class="mt-4 bg-gray-700/50 p-4 rounded-lg optimized-blur transform translateZ(0) border border-gray-600/50">
+                            <p class="text-xs text-gray-400 mb-1 uppercase tracking-wider">Contact Security Team:</p>
+                            <div class="flex items-center mt-2 gap-4">
+                                <div>
+                                    <p class="text-xs text-gray-400">Email:</p>
+                                    <p class="text-sm font-mono text-indigo-400">security@yourdomain.com</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-400">Extension:</p>
+                                    <p class="text-sm font-mono text-indigo-400">x5001</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="p-4 border-t border-gray-700/50 flex justify-end">
-                <button onclick="closeModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white text-sm font-medium transition-colors transform translateZ(0)">
-                    Close
+            <div class="p-4 border-t border-gray-700/50 flex justify-end bg-gray-800/50">
+                <button onclick="closeModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-white text-sm font-medium transition-colors transform translateZ(0) tracking-wider">
+                    ACKNOWLEDGE
                 </button>
             </div>
         </div>
@@ -349,32 +456,41 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             requestAnimationFrame(function() {
+                // Enhanced particle system
                 const particlesContainer = document.getElementById('particles');
-                const particleCount = 20;  
+                const particleCount = 30;  
+                
                 for (let i = 0; i < particleCount; i++) {
                     const particle = document.createElement('div');
                     particle.classList.add('particle');
                     
-                    const size = Math.random() * 2 + 1;
+                    const size = Math.random() * 3 + 1;
                     particle.style.width = `${size}px`;
                     particle.style.height = `${size}px`;
                     
                     particle.style.left = `${Math.random() * 100}%`;
                     particle.style.top = `${Math.random() * 120}%`;
                     
-                    const duration = Math.random() * 15 + 10;
-                    const delay = Math.random() * 10;
+                    const duration = Math.random() * 20 + 10;
+                    const delay = Math.random() * 15;
                     particle.style.animationDuration = `${duration}s`;
                     particle.style.animationDelay = `${delay}s`;
                     
-                    particle.style.opacity = Math.random() * 0.7 + 0.3;
+                    // Random color variation
+                    const hue = 240 + Math.random() * 30 - 15; // indigo with slight variation
+                    particle.style.background = `hsla(${hue}, 90%, 70%, ${Math.random() * 0.5 + 0.3})`;
                     
                     particlesContainer.appendChild(particle);
                 }
-            });
-            
-            requestAnimationFrame(function() {
+                
+                // Focus animation for username field
                 document.getElementById('username').focus();
+                
+                // Add shake animation to error message if present
+                const errorDiv = document.querySelector('.animate-shake');
+                if (errorDiv) {
+                    errorDiv.style.animation = 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both';
+                }
             });
         });
 
@@ -419,13 +535,17 @@
             }
         });
 
-        requestAnimationFrame(function() {
-            const inputs = document.querySelectorAll('input');
-            inputs.forEach((input, index) => {
-                input.style.animation = `fadeIn 0.5s ease-out ${index * 0.1}s forwards`;
-                input.style.opacity = '0';
-            });
-        });
+        // Add CSS for shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                10%, 90% { transform: translate3d(-1px, 0, 0); }
+                20%, 80% { transform: translate3d(2px, 0, 0); }
+                30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+                40%, 60% { transform: translate3d(4px, 0, 0); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
