@@ -159,6 +159,24 @@
         .animate-delay-300 {
             animation-delay: 300ms;
         }
+        
+        /* New enhancements */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+        .icon-hover {
+            transition: transform 0.2s ease;
+        }
+        .icon-hover:hover {
+            transform: scale(1.1);
+        }
+        .smooth-transition {
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4 text-gray-100 overflow-hidden">
@@ -172,7 +190,7 @@
     <div class="particles" id="particles"></div>
 
     <div class="max-w-4xl w-full mx-auto px-4 py-8">
-        <div class="bg-gray-800/90 optimized-blur rounded-xl shadow-2xl overflow-hidden border border-gray-700/50 animate__animated animate__fadeIn">
+        <div class="bg-gray-800/90 optimized-blur rounded-xl shadow-2xl overflow-hidden border border-gray-700/50 animate__animated animate__fadeIn card-hover">
             <div class="bg-gradient-to-r from-indigo-900 to-indigo-800 p-8 text-center relative overflow-hidden">
                 <div class="absolute inset-0 overflow-hidden">
                     <div class="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-indigo-500/10 filter blur-3xl transform translateZ(0)"></div>
@@ -181,69 +199,73 @@
                 </div>
                 
                 <div class="relative z-10">
-                    <div class="inline-block bg-indigo-700/30 p-4 rounded-full mb-6 optimized-blur border border-indigo-500/30 transform translateZ(0) animate__animated animate__pulse animate__infinite">
-                        <i class="fas fa-cloud text-indigo-300 text-4xl"></i>
+                    <div class="inline-block bg-indigo-700/30 p-4 rounded-full mb-6 optimized-blur border border-indigo-500/30 transform translateZ(0) animate__animated animate__pulse animate__infinite icon-hover">
+                        <i class="fas fa-cloud-upload-alt text-indigo-300 text-4xl"></i>
                     </div>
-                    <h1 class="text-4xl font-bold text-white mb-2 glow-text animate__animated animate__fadeIn">CloudSync Services</h1>
+                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 glow-text animate__animated animate__fadeIn">CloudSync Services</h1>
                     <p class="text-xl text-indigo-200 animate__animated animate__fadeIn animate-delay-100">Secure cloud solutions for modern businesses</p>
                 </div>
             </div>
 
             <div class="p-8">
                 <div class="flex items-center mb-8 animate__animated animate__fadeIn animate-delay-200">
-                    <div class="bg-yellow-500/10 p-3 rounded-full mr-4 border border-yellow-500/30">
-                        <i class="fas fa-tools text-yellow-400"></i>
+                    <div class="bg-yellow-500/10 p-3 rounded-full mr-4 border border-yellow-500/30 icon-hover">
+                        <i class="fas fa-server text-yellow-400"></i>
                     </div>
                     <div>
-                        <h2 class="text-2xl font-semibold text-white">Scheduled Maintenance</h2>
-                        <p class="text-gray-400">We're improving our services for you</p>
+                        <h2 class="text-2xl font-semibold text-white">System Maintenance</h2>
+                        <p class="text-gray-400">We're upgrading our infrastructure for better performance</p>
                     </div>
                 </div>
 
                 <div class="space-y-6 mb-8">
                     <div class="flex items-start animate__animated animate__fadeIn animate-delay-300">
-                        <div class="bg-green-500/10 p-2 rounded-full mr-4 border border-green-500/20 mt-1">
-                            <i class="fas fa-check-circle text-green-400 text-lg"></i>
+                        <div class="bg-green-500/10 p-2 rounded-full mr-4 border border-green-500/20 mt-1 icon-hover">
+                            <i class="fas fa-rocket text-green-400 text-lg"></i>
                         </div>
                         <div>
                             <h3 class="font-medium text-white">What's happening?</h3>
-                            <p class="text-gray-400">We're performing scheduled maintenance to upgrade our infrastructure and enhance performance.</p>
+                            <p class="text-gray-400">We're performing scheduled maintenance to upgrade our infrastructure with next-generation cloud technology.</p>
                         </div>
                     </div>
 
                     <div class="flex items-start animate__animated animate__fadeIn animate-delay-400">
-                        <div class="bg-blue-500/10 p-2 rounded-full mr-4 border border-blue-500/20 mt-1">
+                        <div class="bg-blue-500/10 p-2 rounded-full mr-4 border border-blue-500/20 mt-1 icon-hover">
                             <i class="fas fa-clock text-blue-400 text-lg"></i>
                         </div>
                         <div>
                             <h3 class="font-medium text-white">Estimated downtime</h3>
-                            <p class="text-gray-400">Services will be fully restored by <span class="font-medium text-blue-400">23:00 UTC</span>.</p>
+                            <p class="text-gray-400">Services will be fully restored by <span class="font-medium text-blue-400">23:00 UTC</span> (approximately 2 hours from now).</p>
                         </div>
                     </div>
 
                     <div class="flex items-start animate__animated animate__fadeIn animate-delay-500">
-                        <div class="bg-purple-500/10 p-2 rounded-full mr-4 border border-purple-500/20 mt-1">
-                            <i class="fas fa-envelope text-purple-400 text-lg"></i>
+                        <div class="bg-purple-500/10 p-2 rounded-full mr-4 border border-purple-500/20 mt-1 icon-hover">
+                            <i class="fas fa-headset text-purple-400 text-lg"></i>
                         </div>
                         <div>
                             <h3 class="font-medium text-white">Need help?</h3>
-                            <p class="text-gray-400">Contact our support team at <a href="mailto:support@cloudsync.example" class="text-indigo-400 hover:underline">support@cloudsync.example</a></p>
+                            <p class="text-gray-400">Our support team is standing by at <a href="mailto:support@cloudsync.example" class="text-indigo-400 hover:underline smooth-transition">support@cloudsync.example</a> or <span class="text-indigo-400">+1 (800) 555-0199</span></p>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-indigo-900/20 rounded-lg p-6 border border-indigo-800/50 animate__animated animate__fadeIn animate-delay-600">
+                <div class="bg-indigo-900/20 rounded-lg p-6 border border-indigo-800/50 animate__animated animate__fadeIn animate-delay-600 card-hover">
                     <div class="flex">
-                        <div class="bg-indigo-500/10 p-2 rounded-full mr-4 border border-indigo-500/20">
-                            <i class="fas fa-info-circle text-indigo-400 text-lg"></i>
+                        <div class="bg-indigo-500/10 p-2 rounded-full mr-4 border border-indigo-500/20 icon-hover">
+                            <i class="fas fa-chart-line text-indigo-400 text-lg"></i>
                         </div>
                         <div class="flex-1">
-                            <h3 class="text-lg font-medium text-white mb-2">Status Update</h3>
+                            <h3 class="text-lg font-medium text-white mb-2">Maintenance Progress</h3>
                             <p class="text-indigo-200 mb-4">All systems are stable. We're currently at phase 2 of 3 in our maintenance process.</p>
-                            <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="w-full bg-gray-700 rounded-full h-2.5 mb-1">
                                 <div class="status-bar h-2.5 rounded-full" style="width: 65%"></div>
                             </div>
-                            <p class="text-xs text-indigo-300 mt-2">65% complete</p>
+                            <div class="flex justify-between text-xs text-indigo-300">
+                                <span>Started: 18:00 UTC</span>
+                                <span>65% complete</span>
+                                <span>ETA: 23:00 UTC</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -252,10 +274,11 @@
 
         <footer class="mt-12 text-center text-gray-400 text-sm animate__animated animate__fadeIn animate-delay-700">
             <p>© 2023 CloudSync Services. All rights reserved.</p>
-            <div class="flex justify-center space-x-4 mt-4">
-                <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors"><i class="fab fa-github"></i></a>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors icon-hover" title="Twitter"><i class="fab fa-twitter text-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors icon-hover" title="LinkedIn"><i class="fab fa-linkedin-in text-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors icon-hover" title="GitHub"><i class="fab fa-github text-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors icon-hover" title="Status Page"><i class="fas fa-heartbeat text-lg"></i></a>
             </div>
         </footer>
     </div>
@@ -263,13 +286,13 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
+            const particleCount = 40;  // Increased particle count
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
-                const size = Math.random() * 3 + 1;
+                const size = Math.random() * 4 + 1;  // Slightly larger particles
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 
@@ -281,6 +304,10 @@
                 particle.style.animationDuration = `${duration}s`;
                 particle.style.animationDelay = `${delay}s`;
                 
+                // Add some color variation
+                const colors = ['rgba(99, 102, 241, 0.5)', 'rgba(236, 72, 153, 0.4)', 'rgba(16, 185, 129, 0.4)'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
                 particle.style.opacity = Math.random() * 0.7 + 0.3;
                 
                 particlesContainer.appendChild(particle);
@@ -291,6 +318,15 @@
                 setTimeout(() => {
                     el.style.opacity = 1;
                 }, index * 100);
+            });
+            
+            // Add subtle parallax effect on mouse move
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                document.querySelector('.cyber-glow').style.transform = `translate(${x * 10}px, ${y * 10}px)`;
+                document.querySelector('.circuit-lines').style.transform = `translate(${x * -5}px, ${y * -5}px)`;
             });
         });
     </script>
