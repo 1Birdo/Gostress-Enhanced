@@ -8,7 +8,8 @@ Please make sure that both the Proxy server and the C2 Server are using both `cr
 >  (Just been working on other things and projects) [06/07/2025].
 
 If you dont want the Geolocation and want a cleaner Option use this:-
-   New Varient Out AT >https://github.com/1Birdo/Gostress-Optimized
+
+New Varient Out AT >https://github.com/1Birdo/Gostress-Optimized
 
 ## 🌟 Features Overview
 ### Core Infrastructure
