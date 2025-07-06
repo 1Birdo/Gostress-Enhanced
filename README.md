@@ -1,6 +1,8 @@
 
 Please make sure that both the Proxy server and the C2 Server are using both `crt` and `key` file 
 
+## 06/07/2025  Doing slight clean up of project for everyone 🥰
+
 > The ` **Geolocation Tracking**: Visualize bot distribution worldwide` is still in development.
 
 New Varient Out AT >https://github.com/1Birdo/Gostress-Optimized
